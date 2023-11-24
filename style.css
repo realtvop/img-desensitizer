@@ -12,6 +12,9 @@ body {
     width: 100%;
     display: flex;
 }
+.canvas-container {
+    width: 50%;
+}
 canvas {
     max-width: 50vw;
 }
