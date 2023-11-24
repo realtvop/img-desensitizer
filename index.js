@@ -83,6 +83,11 @@ const imgMods = {
     binarization: false,
     binarizationRange: 0,
     binarizationYz: 128,
+    
+    antiocr: false,
+    'antiocr-lineSize': 1,
+    'antiocr-pointSize': 1,
+    'antiocr-points': 1,
 };
 document.querySelectorAll(".imgMod").forEach(element =>
     element.addEventListener('change', evt => {
@@ -115,6 +120,40 @@ function modImg() {
             }
         }
     }
-
     ctxpi.putImageData(imageData, 0, 0);
+
+    if (imgMods.antiocr) {
+        factor = (canvaspi.height * canvaspi.width) / 32;
+
+        //draw points randomly.
+        n2 = factor / 4 * imgMods['antiocr-points'];
+        for (var i = 0; i < n2; i++) {
+            x = random(0, canvaspi.width);
+            y = random(0, canvaspi.height);
+            ctxpi.lineWidth = imgMods['antiocr-pointSize'];
+            ctxpi.beginPath();
+            ctxpi.moveTo(x, y);
+            ctxpi.lineTo(x + 1, y + 1);
+            ctxpi.closePath();
+            ctxpi.stroke();
+        }
+        i = 0;
+
+        //draw lines randomly.
+        for (var i = 0; i < factor / 50; i++) {
+            x = random(0, canvaspi.width);
+            y = random(0, canvaspi.height);
+            ctxpi.lineWidth = imgMods['antiocr-lineSize'] / 2;
+            ctxpi.beginPath();
+            ctxpi.moveTo(x, y);
+            ctxpi.lineTo(x + random(- random(0, canvaspi.width / 2), random(0, canvaspi.width / 2)), y + random(- random(0, canvaspi.width / 2), random(0, canvaspi.width / 2))); //隨機畫線
+            ctxpi.closePath();
+            ctxpi.stroke();
+        }
+
+        function random(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+    }
+
 }
