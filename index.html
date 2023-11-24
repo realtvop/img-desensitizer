@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Desensitizer</title>
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- <h1>Image Desensitizer</h1> -->
+    <div class="canvases-container">
+        <div>
+            <h3>Original Image
+                <input type="button" id="btn-downloadOriginal" value="Download">
+                <input type="button" id="btn-copyOriginal" value="Copy">
+            </h3>
+            <canvas id="canvas-original"></canvas>
+        </div>
+        <div>
+            <h3>Processed Image
+                <input type="button" id="btn-downloadProcessed" value="Download">
+                <input type="button" id="btn-copyProcessed" value="Copy">
+            </h3>
+            <canvas id="canvas-processed"></canvas>
+        </div>
+    </div>
+
+    <br />
+    <input type="file" id="fileInput" name="fileInput" accept="image/*">
+
+    <script src="./index.js"></script>
+</body>
+</html>
