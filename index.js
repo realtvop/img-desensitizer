@@ -82,6 +82,7 @@ function copyCanvasImg(canvas) {
 const imgMods = {
     binarization: false,
     binarizationRange: 0,
+    binarizationYz: 128,
 };
 document.querySelectorAll(".imgMod").forEach(element =>
     element.addEventListener('change', evt => {
@@ -100,11 +101,18 @@ function modImg() {
     if (imgMods.binarization) {
         const levelInterval = 256 / (256 - imgMods.binarizationRange);
         for (let i = 0; i < data.length; i += 4) {
-            const gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
-            const level = Math.round(gray / levelInterval) * levelInterval;
-            data[i] = level;
-            data[i + 1] = level;
-            data[i + 2] = level;
+            if (levelInterval === 256) {
+                const grey = (data[i] + data[i + 1] + data[i + 2]) / 3 >= (256 - imgMods.binarizationYz) ? 255 : 0;
+                data[i] = grey;
+                data[i + 1] = grey;
+                data[i + 2] = grey;
+            } else {
+                const gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                const level = Math.round(gray / levelInterval) * levelInterval;
+                data[i] = level;
+                data[i + 1] = level;
+                data[i + 2] = level;
+            }
         }
     }
 
