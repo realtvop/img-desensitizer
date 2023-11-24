@@ -46,7 +46,7 @@ function updateImg(imgBlob) {
         const height = canvasoi.height = canvaspi.height = img.height;
 
         ctxoi.drawImage(img, 0, 0, width, height);
-        ctxpi.drawImage(img, 0, 0, width, height);
+        modImg();
     });
 }
 
@@ -77,4 +77,36 @@ function copyCanvasImg(canvas) {
             alert('Copy image error:', err);
         });
     });
+}
+
+const imgMods = {
+    binarization: false,
+    binarizationRange: 0,
+};
+document.querySelectorAll(".imgMod").forEach(element =>
+    element.addEventListener('change', evt => {
+        const element = evt.target;
+        imgMods[element.id] = element.type === 'checkbox' ? element.checked : element.value;
+        modImg();
+    })
+);
+
+function modImg() {
+    // ctxpi.drawImage(canvasoi, 0, 0);
+
+    const imageData = ctxoi.getImageData(0, 0, canvasoi.width, canvasoi.height);
+    const data = imageData.data;
+
+    if (imgMods.binarization) {
+        const levelInterval = 256 / (256 - imgMods.binarizationRange);
+        for (let i = 0; i < data.length; i += 4) {
+            const gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
+            const level = Math.round(gray / levelInterval) * levelInterval;
+            data[i] = level;
+            data[i + 1] = level;
+            data[i + 2] = level;
+        }
+    }
+
+    ctxpi.putImageData(imageData, 0, 0);
 }
