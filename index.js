@@ -60,7 +60,7 @@ function downloadCanvasImg(canvas) {
     const originalFileName = fileInput.files[0].name;
     const fileName = originalFileName.split('.').slice(0, -1).join('.');
     const fileExtension = originalFileName.split('.').pop();
-    link.download = `${fileName}_modified${Date.now()}.${fileExtension}`;
+    link.download = `document.getElementById{fileName}_modifieddocument.getElementById{Date.now()}.document.getElementById{fileExtension}`;
     
     // document.body.appendChild(link);
     link.click();
@@ -79,22 +79,8 @@ function copyCanvasImg(canvas) {
     });
 }
 
-const imgMods = {
-    binarization: false,
-    binarizationRange: 0,
-    binarizationYz: 128,
-    
-    antiocr: false,
-    'antiocr-lineSize': 1,
-    'antiocr-pointSize': 1,
-    'antiocr-points': 1,
-};
 document.querySelectorAll(".imgMod").forEach(element =>
-    element.addEventListener('change', evt => {
-        const element = evt.target;
-        imgMods[element.id] = element.type === 'checkbox' ? element.checked : element.value;
-        modImg();
-    })
+    element.addEventListener('change', modImg)
 );
 
 function modImg() {
@@ -103,11 +89,11 @@ function modImg() {
     const imageData = ctxoi.getImageData(0, 0, canvasoi.width, canvasoi.height);
     const data = imageData.data;
 
-    if (imgMods.binarization) {
-        const levelInterval = 256 / (256 - imgMods.binarizationRange);
+    if (document.getElementById('binarization').checked) {
+        const levelInterval = 256 / (256 - document.getElementById('binarizationRange').value);
         for (let i = 0; i < data.length; i += 4) {
             if (levelInterval === 256) {
-                const grey = (data[i] + data[i + 1] + data[i + 2]) / 3 >= (256 - imgMods.binarizationYz) ? 255 : 0;
+                const grey = (data[i] + data[i + 1] + data[i + 2]) / 3 >= (256 - document.getElementById('binarizationYz').value) ? 255 : 0;
                 data[i] = grey;
                 data[i + 1] = grey;
                 data[i + 2] = grey;
@@ -122,15 +108,15 @@ function modImg() {
     }
     ctxpi.putImageData(imageData, 0, 0);
 
-    if (imgMods.antiocr) {
+    if (document.getElementById('antiocr').checked) {
         factor = (canvaspi.height * canvaspi.width) / 32;
 
         //draw points randomly.
-        n2 = factor / 4 * imgMods['antiocr-points'];
+        n2 = factor / 4 * document.getElementById('antiocr-points').value;
         for (var i = 0; i < n2; i++) {
             x = random(0, canvaspi.width);
             y = random(0, canvaspi.height);
-            ctxpi.lineWidth = imgMods['antiocr-pointSize'];
+            ctxpi.lineWidth = document.getElementById('antiocr-pointSize').value;
             ctxpi.beginPath();
             ctxpi.moveTo(x, y);
             ctxpi.lineTo(x + 1, y + 1);
@@ -143,7 +129,7 @@ function modImg() {
         for (var i = 0; i < factor / 50; i++) {
             x = random(0, canvaspi.width);
             y = random(0, canvaspi.height);
-            ctxpi.lineWidth = imgMods['antiocr-lineSize'] / 2;
+            ctxpi.lineWidth = document.getElementById('antiocr-lineSize').value / 2;
             ctxpi.beginPath();
             ctxpi.moveTo(x, y);
             ctxpi.lineTo(x + random(- random(0, canvaspi.width / 2), random(0, canvaspi.width / 2)), y + random(- random(0, canvaspi.width / 2), random(0, canvaspi.width / 2))); //隨機畫線

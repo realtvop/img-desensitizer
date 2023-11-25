@@ -1,28 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="mdui-theme-dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Desensitizer</title>
     <link href="./style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://res.realtvop.eu.org/mdui/2.0/2.0.2/mdui.css">
+    <link rel="stylesheet" href="https://res.realtvop.eu.org/mdui/fonts/roboto.css">
+    <script src="https://res.realtvop.eu.org/mdui/2.0/2.0.2/mdui.global.js"></script>
 </head>
 <body>
-    <h1 compact>Image Desensitizer</h1>
-    by <a href="https://github.com/realtvop" target="_blank">realtvop</a>. GitHub:<a href="https://github.com/realtvop/img-desensitizer" target="_blank">realtvop/img-desensitizer</a>
+    <mdui-top-app-bar>
+        <mdui-top-app-bar-title>Image Desensitizer
+            <span style="font-size: small;">by <a href="https://github.com/realtvop" target="_blank">realtvop</a>. GitHub:<a href="https://github.com/realtvop/img-desensitizer" target="_blank">realtvop/img-desensitizer</a></span>
+        </mdui-top-app-bar-title>
+    </mdui-top-app-bar>
     <div class="canvases-container">
         <div class="canvas-container">
-            <h3>Original Image
-                <input type="button" id="btn-downloadOriginal" value="Download">
-                <input type="button" id="btn-copyOriginal" value="Copy">
-            </h3>
+            <h3>Original Image</h3>
             <canvas id="canvas-original"></canvas>
+            <br />
+            <mdui-segmented-button-group>
+                <mdui-segmented-button id="btn-downloadOriginal">Download</mdui-segmented-button>
+                <mdui-segmented-button id="btn-copyOriginal">Copy</mdui-segmented-button>
+            </mdui-segmented-button-group>
         </div>
         <div class="canvas-container">
-            <h3>Processed Image
-                <input type="button" id="btn-downloadProcessed" value="Download">
-                <input type="button" id="btn-copyProcessed" value="Copy">
-            </h3>
+            <h3>Processed Image</h3>
             <canvas id="canvas-processed"></canvas>
+            <br />
+            <mdui-segmented-button-group>
+                <mdui-segmented-button id="btn-downloadProcessed">Download</mdui-segmented-button>
+                <mdui-segmented-button id="btn-copyProcessed">Copy</mdui-segmented-button>
+            </mdui-segmented-button-group>
         </div>
     </div>
 
@@ -31,14 +41,33 @@
     <input type="file" id="fileInput" name="fileInput" accept="image/*">
     <br />
 
-    <h3 compact><input type="checkbox" class="imgMod" id="binarization"><label for="binarization">Binarization</label></h3>
-    Geryscales:<input type="range" class="imgMod" id="binarizationRange" min="1" max="255" step="1" value="1">
-    Threshold:<input type="range" class="imgMod" id="binarizationYz" min="1" max="255" step="1" value="128">
-
-    <h3 compact><input type="checkbox" class="imgMod" id="antiocr"><label for="antiocr">Anti-ocr</label></h3>
-    Line Size:<input type="range" class="imgMod" id="antiocr-lineSize" min="1" max="20" step="1" value="1">
-    Point Size:<input type="range" class="imgMod" id="antiocr-pointSize" min="1" max="20" step="1" value="1">
-    Points:<input type="range" class="imgMod" id="antiocr-points" min="1" max="20" step="1" value="1">
+    <mdui-collapse>
+        <mdui-collapse-item>
+            <mdui-list-item slot="header">
+                <div style="display: flex; align-items: center;">
+                    <mdui-switch class="imgMod" id="binarization"></mdui-switch>
+                    <span style="margin-left: 10px; font-weight: bold;">Binarization</span>
+                </div>
+            </mdui-list-item>
+            <div style="margin-left: 2.5rem">
+                Geryscales:<mdui-slider class="imgMod" id="binarizationRange" min="1" max="255" step="1" value="1"></mdui-slider>
+                Threshold:<mdui-slider class="imgMod" id="binarizationYz" min="1" max="255" step="1" value="128"></mdui-slider>
+            </div>
+        </mdui-collapse-item>
+        <mdui-collapse-item>
+            <mdui-list-item slot="header">
+                <div style="display: flex; align-items: center;">
+                    <mdui-switch class="imgMod" id="antiocr"></mdui-switch>
+                    <span style="margin-left: 10px; font-weight: bold;">Anti-ocr</span>
+                </div>
+            </mdui-list-item>
+            <div style="margin-left: 2.5rem">
+                Line Size:<mdui-slider class="imgMod" id="antiocr-lineSize" min="1" max="20" step="1" value="1"></mdui-slider>
+                Point Size:<mdui-slider class="imgMod" id="antiocr-pointSize" min="1" max="20" step="1" value="1"></mdui-slider>
+                Points:<mdui-slider class="imgMod" id="antiocr-points" min="1" max="20" step="1" value="1"></mdui-slider>
+            </div>
+        </mdui-collapse-item>
+    </mdui-collapse>
 
     <script src="./index.js"></script>
 </body>
