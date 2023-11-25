@@ -40,6 +40,11 @@ function handleFile(file) {
     }
 }
 
+document.addEventListener('paste', e => {
+    var items = e.clipboardData.items;
+    for (var i = 0; i < items.length; i++) if (items[i].type.startsWith('image/')) return updateImg(items[i].getAsFile());
+});
+
 function updateImg(imgBlob) {
     createImageBitmap(imgBlob).then(img => {
         const width = canvasoi.width = canvaspi.width = img.width;
