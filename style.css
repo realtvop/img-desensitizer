@@ -18,3 +18,10 @@ body {
 canvas {
     max-width: 50vw;
 }
+
+h1[compact],
+/* h2[compact], */
+h3[compact] {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}

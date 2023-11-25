@@ -7,7 +7,8 @@
     <link href="./style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <!-- <h1>Image Desensitizer</h1> -->
+    <h1 compact>Image Desensitizer</h1>
+    by <a href="https://github.com/realtvop" target="_blank">realtvop</a>. GitHub:<a href="https://github.com/realtvop/img-desensitizer" target="_blank">realtvop/img-desensitizer</a>
     <div class="canvases-container">
         <div class="canvas-container">
             <h3>Original Image
@@ -26,16 +27,18 @@
     </div>
 
     <br />
+    <h3 compact>Upload an image or drag it into the page</h3>
     <input type="file" id="fileInput" name="fileInput" accept="image/*">
     <br />
-    <input type="checkbox" class="imgMod" id="binarization"><label for="binarization">Binarization</label>
-    <input type="range" class="imgMod" id="binarizationRange" min="1" max="255" step="1" value="1">
-    <input type="range" class="imgMod" id="binarizationYz" min="1" max="255" step="1" value="128">
-    <br />
-    <input type="checkbox" class="imgMod" id="antiocr"><label for="antiocr">Anti-ocr</label>
-    <input type="range" class="imgMod" id="antiocr-lineSize" min="1" max="20" step="1" value="1">
-    <input type="range" class="imgMod" id="antiocr-pointSize" min="1" max="20" step="1" value="1">
-    <input type="range" class="imgMod" id="antiocr-points" min="1" max="20" step="1" value="1">
+
+    <h3 compact><input type="checkbox" class="imgMod" id="binarization"><label for="binarization">Binarization</label></h3>
+    Geryscales:<input type="range" class="imgMod" id="binarizationRange" min="1" max="255" step="1" value="1">
+    Threshold:<input type="range" class="imgMod" id="binarizationYz" min="1" max="255" step="1" value="128">
+
+    <h3 compact><input type="checkbox" class="imgMod" id="antiocr"><label for="antiocr">Anti-ocr</label></h3>
+    Line Size:<input type="range" class="imgMod" id="antiocr-lineSize" min="1" max="20" step="1" value="1">
+    Point Size:<input type="range" class="imgMod" id="antiocr-pointSize" min="1" max="20" step="1" value="1">
+    Points:<input type="range" class="imgMod" id="antiocr-points" min="1" max="20" step="1" value="1">
 
     <script src="./index.js"></script>
 </body>
