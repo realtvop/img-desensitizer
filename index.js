@@ -41,8 +41,12 @@ function handleFile(file) {
 }
 
 document.addEventListener('paste', e => {
-    var items = e.clipboardData.items;
-    for (var i = 0; i < items.length; i++) if (items[i].type.startsWith('image/')) return updateImg(items[i].getAsFile());
+    const items = e.clipboardData.items;
+    for (let i = 0; i < items.length; i++) if (items[i].type.startsWith('image/')) return updateImg(items[i].getAsFile());
+});
+document.getElementById('btn-paste').addEventListener('click', async e => {
+    const items = await navigator.clipboard.read();
+    for (const item of items) if(item.types[0].startsWith("image/")) return updateImg(await item.getType(item.types[0]));
 });
 
 function updateImg(imgBlob) {
