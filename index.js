@@ -89,7 +89,7 @@ function copyCanvasImg(canvas) {
 }
 const isAppleDevice = navigator.platform.startsWith("Mac") || navigator.platform.startsWith("i");
 document.addEventListener('keydown', e => {
-    e.preventDefault();
+    // e.preventDefault();
     if (isAppleDevice ? event.metaKey : event.ctrlKey)
         if (event.key === 'c' || event.keyCode === 67)
             copyCanvasImg(canvaspi);
