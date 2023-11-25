@@ -69,7 +69,7 @@ function downloadCanvasImg(canvas) {
     const originalFileName = fileInput.files[0].name;
     const fileName = originalFileName.split('.').slice(0, -1).join('.');
     const fileExtension = originalFileName.split('.').pop();
-    link.download = `document.getElementById{fileName}_modifieddocument.getElementById{Date.now()}.document.getElementById{fileExtension}`;
+    link.download = `${fileName}_modified${Date.now()}.${fileExtension}`;
     
     // document.body.appendChild(link);
     link.click();
