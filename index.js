@@ -83,6 +83,15 @@ function copyCanvasImg(canvas) {
         });
     });
 }
+const isAppleDevice = navigator.platform.startsWith("Mac") || navigator.platform.startsWith("i");
+document.addEventListener('keydown', e => {
+    e.preventDefault();
+    if (isAppleDevice ? event.metaKey : event.ctrlKey)
+        if (event.key === 'c' || event.keyCode === 67)
+            copyCanvasImg(canvaspi);
+        else if (event.key === 's' || event.keyCode === 83)
+            downloadCanvasImg(canvaspi);
+});
 
 document.querySelectorAll(".imgMod").forEach(element =>
     element.addEventListener('change', modImg)
