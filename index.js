@@ -5,11 +5,14 @@ const ctxoi = canvasoi.getContext('2d');
 const canvaspi = document.getElementById('canvas-processed');
 const ctxpi = canvaspi.getContext('2d');
 
-const fileInput = document.getElementById('fileInput');
+const fileInput = document.createElement('input');
+fileInput.type = 'file';
+fileInput.accept = 'image/*';
 fileInput.addEventListener('change', evt => {
     if (evt.target.files.length > 0) handleFile(evt.target.files[0]);
     else alert('No file chosen!');
 });
+document.getElementById('btn-upload').addEventListener('click', () => fileInput.click());
 document.body.addEventListener('dragover', function (e) {
     e.preventDefault();
     document.body.style.border = '2px solid #000';
