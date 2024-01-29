@@ -113,18 +113,11 @@ function modImg() {
     if (document.getElementById('binarization').checked) {
         const levelInterval = 256 / (256 - document.getElementById('binarizationRange').value);
         for (let i = 0; i < data.length; i += 4) {
-            if (levelInterval === 256) {
-                const grey = (data[i] + data[i + 1] + data[i + 2]) / 3 >= (256 - document.getElementById('binarizationYz').value) ? 255 : 0;
-                data[i] = grey;
-                data[i + 1] = grey;
-                data[i + 2] = grey;
-            } else {
-                const gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
-                const level = Math.round(gray / levelInterval) * levelInterval;
-                data[i] = level;
-                data[i + 1] = level;
-                data[i + 2] = level;
-            }
+            const gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
+            const level = gray > (255 - document.getElementById('binarizationYz').value) ? 255 : Math.round(gray / levelInterval) * levelInterval;
+            data[i] = level;
+            data[i + 1] = level;
+            data[i + 2] = level;
         }
     }
     ctxpi.putImageData(imageData, 0, 0);
